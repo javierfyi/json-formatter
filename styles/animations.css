@@ -1,0 +1,262 @@
+/* JSON Formatter - Enhanced with The Easing Blueprint */
+
+/* Custom easing curves based on The Easing Blueprint */
+.ease-out-custom {
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.ease-in-out-custom {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ease-in-custom {
+  transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+/* Micro-interactions */
+.button-press {
+  transition: transform 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.button-press:active {
+  transform: scale(0.95);
+}
+
+.button-hover {
+  transition: transform 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.button-hover:hover {
+  transform: scale(1.05);
+}
+
+/* JSON token animations */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.json-token {
+  animation: fadeInUp 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Settings panel animations */
+.settings-panel {
+  transition: all 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.settings-panel-enter {
+  max-height: 0;
+  opacity: 0;
+  margin-bottom: 0;
+}
+
+.settings-panel-enter-active {
+  max-height: 24rem;
+  opacity: 1;
+  margin-bottom: 1rem;
+}
+
+.settings-panel-exit {
+  max-height: 24rem;
+  opacity: 1;
+  margin-bottom: 1rem;
+}
+
+.settings-panel-exit-active {
+  max-height: 0;
+  opacity: 0;
+  margin-bottom: 0;
+}
+
+/* Error message animations */
+@keyframes slideInFromTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.error-message {
+  animation: slideInFromTop 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Output section animations */
+@keyframes slideInFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.output-section {
+  animation: slideInFromBottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Form element animations */
+.form-element {
+  transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.form-element:focus {
+  transform: scale(1.02);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Copy button feedback */
+@keyframes copySuccess {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.copy-success {
+  animation: copySuccess 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Loading states */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.loading-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Shimmer effect for header */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Focus states for accessibility */
+.focus-ring {
+  transition: box-shadow 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px currentColor;
+}
+
+/* Touch device hover support */
+@media (hover: hover) and (pointer: fine) {
+  .hover-lift:hover {
+    transform: translateY(-1px);
+  }
+  
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .button-press,
+  .button-hover,
+  .hover-lift,
+  .hover-scale,
+  .json-token,
+  .error-message,
+  .output-section,
+  .form-element,
+  .copy-success,
+  .loading-pulse,
+  .shimmer {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* JSON syntax highlighting enhancements */
+.json-key {
+  color: #d73a49;
+  font-weight: 600;
+  transition: color 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.json-string {
+  color: #032f62;
+  transition: color 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.json-number {
+  color: #005cc5;
+  font-weight: 500;
+  transition: color 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.json-boolean {
+  color: #e36209;
+  font-weight: 600;
+  transition: color 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.json-null {
+  color: #6f42c1;
+  font-weight: 600;
+  transition: color 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.json-punctuation {
+  color: #24292e;
+  font-weight: 500;
+  transition: color 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-duration: 200ms;
+}
+
+/* Performance optimizations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}

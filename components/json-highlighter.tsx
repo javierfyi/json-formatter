@@ -116,7 +116,14 @@ export function JsonHighlighter({ json }: JsonHighlighterProps) {
     <pre className="font-mono text-sm leading-relaxed">
       <code>
         {tokens.map((token, index) => (
-          <span key={index} className={getColorClass(token.type)}>
+          <span 
+            key={index} 
+            className={`${getColorClass(token.type)} transition-colors duration-200 ease-out`}
+            style={{ 
+              animationDelay: `${index * 10}ms`,
+              animation: 'fadeInUp 0.3s ease-out forwards'
+            }}
+          >
             {token.value}
           </span>
         ))}

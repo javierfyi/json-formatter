@@ -19,7 +19,7 @@ export function Header() {
           <nav className="flex items-center space-x-6 absolute left-1/2 transform -translate-x-1/2">
             <Link 
               href="/" 
-              className={`text-sm transition-colors flex items-center ${
+              className={`text-sm transition-all duration-200 ease-out flex items-center hover:scale-105 ${
                 pathname === '/' 
                   ? 'text-foreground font-medium' 
                   : 'text-muted-foreground hover:text-foreground'
@@ -36,7 +36,7 @@ export function Header() {
             </Link>
             <Link 
               href="/docs" 
-              className={`text-sm transition-colors flex items-center ${
+              className={`text-sm transition-all duration-200 ease-out flex items-center hover:scale-105 ${
                 pathname === '/docs' 
                   ? 'text-foreground font-medium' 
                   : 'text-muted-foreground hover:text-foreground'
@@ -59,7 +59,7 @@ export function Header() {
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-900"
+              className="text-gray-900 transition-all duration-200 ease-out hover:scale-110 active:scale-95"
             >
               <Icons.gitHub className="w-4 h-4" />
             </a>

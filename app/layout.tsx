@@ -7,6 +7,7 @@ import { Suspense } from "react"
 import { Header } from "@/components/header"
 import { Toaster } from "@/components/ui/sonner"
 import "./globals.css"
+import "../styles/animations.css"
 
 export const metadata: Metadata = {
   title: "JSON Formatter Prompt",

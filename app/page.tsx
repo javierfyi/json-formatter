@@ -14,19 +14,25 @@ export default function JsonFormatterPage() {
   const [error, setError] = useState("")
   const [copied, setCopied] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [settings, setSettings] = useState<JsonSettingsType>({
     indentation: 2,
     specification: 'rfc8259'
   })
 
-  const formatJson = () => {
+  const formatJson = async () => {
     setError("")
     setOutput("")
+    setIsLoading(true)
 
     if (!input.trim()) {
       setError("Please enter some JSON to format")
+      setIsLoading(false)
       return
     }
+
+    // Simulate processing time for better UX
+    await new Promise(resolve => setTimeout(resolve, 300))
 
     try {
       const parsed = JSON.parse(input)
@@ -65,6 +71,8 @@ export default function JsonFormatterPage() {
         setError("An unexpected error occurred")
         toast.error("An unexpected error occurred")
       }
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -107,7 +115,7 @@ export default function JsonFormatterPage() {
                 variant="ghost"
                 size="sm"
                 onClick={() => setShowSettings(!showSettings)}
-                className="flex items-center h-8"
+                className="flex items-center h-8 transition-all duration-200 ease-out hover:scale-105 active:scale-95"
               >
                 <Settings className="h-4 w-4" />
               </Button>
@@ -115,7 +123,7 @@ export default function JsonFormatterPage() {
                 variant="ghost"
                 size="sm"
                 onClick={clearInput}
-                className="flex items-center h-8 mr-2"
+                className="flex items-center h-8 mr-2 transition-all duration-200 ease-out hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                 disabled={!input.trim()}
               >
                 <Trash2 className="h-4 w-4" />
@@ -123,22 +131,29 @@ export default function JsonFormatterPage() {
               <Button
                 onClick={formatJson}
                 size="sm"
-                disabled={!input.trim()}
-                className="px-3 py-1.5 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-xs h-8 disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={!input.trim() || isLoading}
+                className="px-3 py-1.5 bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200 ease-out hover:scale-105 active:scale-95 text-xs h-8 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
-                Format JSON
+                {isLoading ? (
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    Processing...
+                  </div>
+                ) : (
+                  "Format JSON"
+                )}
               </Button>
             </div>
           </div>
           
-          {showSettings && (
-            <div className="bg-white rounded-lg p-4 border border-muted mb-4">
+          <div className={`transition-all duration-300 ease-out ${showSettings ? 'max-h-96 opacity-100 mb-4' : 'max-h-0 opacity-0 mb-0'}`}>
+            <div className="bg-white rounded-lg p-4 border border-muted overflow-visible">
               <JsonSettings 
                 settings={settings} 
                 onSettingsChange={setSettings} 
               />
             </div>
-          )}
+          </div>
           <textarea
             id="json-input"
             value={input}
@@ -151,21 +166,21 @@ export default function JsonFormatterPage() {
 
         {/* Error Message */}
         {error && (
-          <div className="mb-6 p-4 bg-destructive/10 border border-destructive rounded-lg">
+          <div className="mb-6 p-4 bg-destructive/10 border border-destructive rounded-lg animate-in slide-in-from-top-2 duration-300 ease-out">
             <p className="text-sm text-destructive leading-relaxed">{error}</p>
           </div>
         )}
 
         {/* Output Section */}
         {output && (
-          <div>
+          <div className="animate-in slide-in-from-bottom-2 duration-500 ease-out">
             <div className="flex items-center justify-between mb-3">
               <label className="block text-sm font-medium text-foreground">Output</label>
               <Button
                 onClick={copyToClipboard}
                 variant="ghost"
                 size="sm"
-                className="h-7 px-3 text-muted-foreground hover:text-foreground"
+                className="h-7 px-3 text-muted-foreground hover:text-foreground transition-all duration-200 ease-out hover:scale-105 active:scale-95"
               >
                 {copied ? (
                   <>
